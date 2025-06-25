@@ -6,13 +6,17 @@ import {
   getNoteById,
   updateNote,
 } from "../controllers/notesController.js";
+import { protect } from "../middleware/authMiddleware.js";
 
 const router = express.Router();
 
-router.get("/", getAllNotes);
-router.get("/:id", getNoteById);
-router.post("/", createNote);
-router.put("/:id", updateNote);
-router.delete("/:id", deleteNote);
+// Protect all note routes
+router.use(protect);
+
+router.get("/", getAllNotes);         // Get all notes for logged-in user
+router.get("/:id", getNoteById);      // Get single note by ID (if it belongs to user)
+router.post("/", createNote);         // Create new note linked to user
+router.put("/:id", updateNote);       // Update note if owner
+router.delete("/:id", deleteNote);    // Delete note if owner
 
 export default router;

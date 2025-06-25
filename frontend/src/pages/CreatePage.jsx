@@ -1,8 +1,9 @@
 import { ArrowLeftIcon } from "lucide-react";
-import { useState } from "react";
+import { useState, useContext, useEffect } from "react";
 import toast from "react-hot-toast";
 import { Link, useNavigate } from "react-router";
 import api from "../lib/axios";
+import { AuthContext } from "../context/AuthContext";
 
 const CreatePage = () => {
   const [title, setTitle] = useState("");
@@ -10,6 +11,15 @@ const CreatePage = () => {
   const [loading, setLoading] = useState(false);
 
   const navigate = useNavigate();
+  const { isAuthenticated } = useContext(AuthContext);
+
+  // 🔒 Check login before allowing access
+  useEffect(() => {
+    if (!isAuthenticated) {
+      toast.error("Please login to create a note");
+      navigate("/");
+    }
+  }, [isAuthenticated]);
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -30,7 +40,7 @@ const CreatePage = () => {
       navigate("/");
     } catch (error) {
       console.log("Error creating note", error);
-      if (error.response.status === 429) {
+      if (error.response?.status === 429) {
         toast.error("Slow down! You're creating notes too fast", {
           duration: 4000,
           icon: "💀",
@@ -94,4 +104,5 @@ const CreatePage = () => {
     </div>
   );
 };
+
 export default CreatePage;
