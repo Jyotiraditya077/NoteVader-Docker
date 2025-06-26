@@ -3,16 +3,32 @@ import { Link } from "react-router";
 import { formatDate } from "../lib/utils";
 import api from "../lib/axios";
 import toast from "react-hot-toast";
+import { useEffect, useState } from "react";
 
 const NoteCard = ({ note, setNotes }) => {
-  const handleDelete = async (e, id) => {
-    e.preventDefault(); // get rid of the navigation behaviour
+  const [themeColor, setThemeColor] = useState("#00FF9D");
 
+  const updateThemeColor = () => {
+    const currentTheme = localStorage.getItem("theme");
+    setThemeColor(currentTheme === "darth" ? "#FF4444" : "#00FF9D");
+  };
+
+  useEffect(() => {
+    updateThemeColor(); // set initially
+    window.addEventListener("theme-changed", updateThemeColor); // listen
+
+    return () => {
+      window.removeEventListener("theme-changed", updateThemeColor); // cleanup
+    };
+  }, []);
+
+  const handleDelete = async (e, id) => {
+    e.preventDefault();
     if (!window.confirm("Are you sure you want to delete this note?")) return;
 
     try {
       await api.delete(`/notes/${id}`);
-      setNotes((prev) => prev.filter((note) => note._id !== id)); // get rid of the deleted one
+      setNotes((prev) => prev.filter((note) => note._id !== id));
       toast.success("Note deleted successfully");
     } catch (error) {
       console.log("Error in handleDelete", error);
@@ -23,8 +39,8 @@ const NoteCard = ({ note, setNotes }) => {
   return (
     <Link
       to={`/note/${note._id}`}
-      className="card bg-base-100 hover:shadow-lg transition-all duration-200 
-      border-t-4 border-solid border-[#00FF9D]"
+      className="card bg-base-100 hover:shadow-lg transition-all duration-200"
+      style={{ borderTop: `4px solid ${themeColor}` }}
     >
       <div className="card-body">
         <h3 className="card-title text-base-content">{note.title}</h3>
@@ -47,4 +63,5 @@ const NoteCard = ({ note, setNotes }) => {
     </Link>
   );
 };
+
 export default NoteCard;

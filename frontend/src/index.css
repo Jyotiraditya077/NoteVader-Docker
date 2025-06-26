@@ -1,3 +1,8 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+/* Force consistent button shape across themes */
+.btn {
+    @apply rounded-full;
+  }
+  
