@@ -7,7 +7,7 @@
 **NoteVader** is a powerful yet minimal note-taking web app inspired by the aesthetics of Star Wars. Built with **DaisyUI**, it features toggleable **Yoda** (Master Yoda) and **Darth** (Darth Vader) themes, JWT-based auth, and an elegant UI to help users jot down, view, and manage notes with ease.
 
 <p align="center">
-  <img src="https://readme-typing-svg.herokuapp.com?font=Fira+Code&size=22&pause=1000&color=00FF9D&center=true&vCenter=true&width=780&lines=May+the+Force+be+with+you.;May+the+Code+be+with+you.;Crafting+with+light+%26+dark+themes.;Choose+your+side:+Yoda+or+Darth.;Notes,+but+with+style+⚡;Code+hard,+code+smart+💻" alt="Typing SVG Yoda-Darth Theme" />
+  <img src="https://readme-typing-svg.herokuapp.com?font=Fira+Code&size=22&pause=1000&color=00FF9D&center=true&vCenter=true&width=780&lines=May+the+Force+be+with+you.;May+the+Code+be+with+you." alt="Typing SVG Yoda" />
 </p>
 
 
