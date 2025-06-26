@@ -1,7 +1,7 @@
 # NoteVader 
 
 <p align="center">
-  <img src="https://github.com/Jyotiraditya077/NoteVader/blob/main/frontend/public/logo.png" alt="NoteVader Logo" width="120px">
+  <img src="https://github.com/Jyotiraditya077/NoteVader/blob/main/frontend/public/logo.png" alt="NoteVader Logo" width="100px">
 </p>
 
 **NoteVader** is a powerful yet minimal note-taking web app inspired by the aesthetics of Star Wars. Built with **DaisyUI**, it features toggleable **Yoda** (Master Yoda) and **Darth** (Darth Vader) themes, JWT-based auth, and an elegant UI to help users jot down, view, and manage notes with ease.
