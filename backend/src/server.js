@@ -4,7 +4,7 @@ import dotenv from "dotenv";
 import path from "path";
 
 import notesRoutes from "./routes/notesRoutes.js";
-import authRoutes from "./routes/authRoutes.js"; // ✅ ADD THIS
+import authRoutes from "./routes/authRoutes.js";
 import { connectDB } from "./config/db.js";
 import rateLimiter from "./middleware/rateLimiter.js";
 
@@ -14,23 +14,27 @@ const app = express();
 const PORT = process.env.PORT || 5001;
 const __dirname = path.resolve();
 
-// middleware
-if (process.env.NODE_ENV !== "production") {
-  app.use(
-    cors({
-      origin: "http://localhost:5173",
-      credentials: true, // ✅ Optional, helps with cookies if needed
-    })
-  );
-}
+// ✅ Apply CORS for both local and production
+const allowedOrigins = [
+  "http://localhost:5173",
+  "https://notevader-docker.onrender.com"
+];
+
+app.use(
+  cors({
+    origin: allowedOrigins,
+    credentials: true,
+  })
+);
 
 app.use(express.json());
 app.use(rateLimiter);
 
-// ✅ Register auth route
-app.use("/api/auth", authRoutes);     // <-- add this line
+// ✅ Register routes
+app.use("/api/auth", authRoutes);
 app.use("/api/notes", notesRoutes);
 
+// ✅ Serve frontend in production
 if (process.env.NODE_ENV === "production") {
   app.use(express.static(path.join(__dirname, "../frontend/dist")));
 
@@ -39,6 +43,7 @@ if (process.env.NODE_ENV === "production") {
   });
 }
 
+// ✅ Connect DB and start server
 connectDB().then(() => {
   app.listen(PORT, () => {
     console.log("Server started on PORT:", PORT);
