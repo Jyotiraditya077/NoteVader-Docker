@@ -3,8 +3,10 @@ import axios from "axios";
 // ✅ Detect environment
 const isDev = import.meta.env.MODE === "development";
 
-// ✅ Use proxy in dev, Docker container hostname in prod
-const BASE_URL = isDev ? "/api" : "http://notevader-backend:5001/api";
+// ✅ Base URL: use proxy in dev, full HTTPS backend URL in production
+const BASE_URL = isDev
+  ? "/api"
+  : "https://notevader-backend.onrender.com/api";
 
 const api = axios.create({
   baseURL: BASE_URL,
