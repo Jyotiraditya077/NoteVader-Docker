@@ -23,7 +23,7 @@ const Navbar = () => {
 
   const handleAuth = async (e) => {
     e.preventDefault();
-    const endpoint = isLogin ? "/auth/login" : "/auth/register";
+    const endpoint = isLogin ? "/auth/login" : "/auth/register"; // ✅ FIXED: no duplicate /api
 
     try {
       const res = await axios.post(endpoint, form);
@@ -70,11 +70,8 @@ const Navbar = () => {
     <header className="bg-base-300 border-b border-base-content/10 relative z-50">
       <div className="mx-auto max-w-6xl p-4">
         <div className="flex items-center justify-between">
-          {/* Logo & Greeting */}
           <div>
-            <h1 className="text-3xl font-bold text-primary font-mono tracking-tight">
-              NoteVader
-            </h1>
+            <h1 className="text-3xl font-bold text-primary font-mono tracking-tight">NoteVader</h1>
             {isAuthenticated && (
               <p className="text-sm font-medium text-base-content/80 mt-1">
                 Hi, {user?.username} ☄️
@@ -82,9 +79,7 @@ const Navbar = () => {
             )}
           </div>
 
-          {/* Desktop Buttons */}
           <div className="hidden sm:flex gap-3 items-center">
-            {/* Theme Toggle Button */}
             <button
               className="btn btn-outline rounded-lg min-w-[8rem] flex items-center gap-2"
               onClick={toggleTheme}
@@ -116,18 +111,13 @@ const Navbar = () => {
             )}
           </div>
 
-          {/* Mobile Hamburger */}
           <div className="sm:hidden">
-            <button
-              className="btn btn-ghost"
-              onClick={() => setMobileMenuOpen((prev) => !prev)}
-            >
+            <button className="btn btn-ghost" onClick={() => setMobileMenuOpen(!mobileMenuOpen)}>
               {mobileMenuOpen ? <XIcon /> : <MenuIcon />}
             </button>
           </div>
         </div>
 
-        {/* Mobile Menu */}
         {mobileMenuOpen && (
           <div className="sm:hidden mt-4 space-y-2 relative z-50">
             <button
@@ -169,7 +159,6 @@ const Navbar = () => {
         )}
       </div>
 
-      {/* Auth Modal */}
       <dialog id="auth_modal" className="modal">
         <div className="modal-box">
           <h3 className="font-bold text-lg mb-4">
@@ -212,20 +201,14 @@ const Navbar = () => {
             {isLogin ? (
               <p>
                 Don&apos;t have an account?{" "}
-                <span
-                  className="text-blue-500 cursor-pointer"
-                  onClick={() => setIsLogin(false)}
-                >
+                <span className="text-blue-500 cursor-pointer" onClick={() => setIsLogin(false)}>
                   Register here
                 </span>
               </p>
             ) : (
               <p>
                 Already registered?{" "}
-                <span
-                  className="text-blue-500 cursor-pointer"
-                  onClick={() => setIsLogin(true)}
-                >
+                <span className="text-blue-500 cursor-pointer" onClick={() => setIsLogin(true)}>
                   Login instead
                 </span>
               </p>

@@ -1,13 +1,15 @@
 import axios from "axios";
 
-// Dynamic base URL for dev/prod
-const BASE_URL = import.meta.env.MODE === "development" ? "http://localhost:5001/api" : "/api";
+// ✅ Detect environment
+const isDev = import.meta.env.MODE === "development";
+
+// ✅ Use proxy in dev, Docker container hostname in prod
+const BASE_URL = isDev ? "/api" : "http://notevader-backend:5001/api";
 
 const api = axios.create({
   baseURL: BASE_URL,
 });
 
-// Interceptor: adds token before every request
 api.interceptors.request.use(
   (config) => {
     const token = localStorage.getItem("token");
