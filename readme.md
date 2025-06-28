@@ -1,10 +1,10 @@
-# NoteVader 
+# NoteVader-Docker 
 
 <p align="center">
   <img src="https://github.com/Jyotiraditya077/NoteVader/blob/main/frontend/public/logo.png" alt="NoteVader Logo" width="100px">
 </p>
 
-**NoteVader** is a powerful yet minimal note-taking web app inspired by the aesthetics of Star Wars. Built with **DaisyUI**, it features toggleable **Yoda** (Master Yoda) and **Darth** (Darth Vader) themes, JWT-based auth, and an elegant UI to help users jot down, view, and manage notes with ease.
+**NoteVader-Docker** is a Dockerized, full-stack note-taking web app inspired by *Star Wars*. Users can securely write, view, and delete notes with theme switching (Yoda & Darth). Built using the MERN stack and containerized for seamless deployment.
 
 <p align="center">
   <img src="https://readme-typing-svg.herokuapp.com?font=Fira+Code&size=22&pause=1000&color=00FF9D&center=true&vCenter=true&width=780&lines=May+the+Force+be+with+you.;May+the+Code+be+with+you." alt="Typing SVG Yoda" />
@@ -17,6 +17,7 @@
 
 - [Features](#features)
 - [Demo](#demo)
+- [Docker Setup](#-docker-setup)
 - [Tech Stack](#tech-stack)
 - [Contact](#contact)
 
@@ -35,9 +36,36 @@
 
 ## Demo
 
-🔗 **Live App**: [NoteVader](https://notevader.onrender.com)
+🔗 **Live App**: [NoteVader-Docker](https://notevader-docker.onrender.com)
 
 ---
+
+## Docker Setup
+
+```bash
+
+git clone https://github.com/Jyotiraditya077/NoteVader-Docker.git  
+cd NoteVader-Docker  
+docker-compose up --build  
+
+## Local URLs (After Docker Compose)  
+
+- **Frontend** → [http://localhost:5173](http://localhost:5173)  
+- **Backend** → [http://localhost:5001](http://localhost:5001)  
+
+## Manual Run (Individual Containers)  
+
+# Backend  
+cd backend  
+docker build -t notevader-backend .  
+docker run -d -p 5001:5001 notevader-backend  
+
+# Frontend  
+cd frontend  
+docker build -t notevader-frontend .  
+docker run -d -p 5173:80 notevader-frontend  
+
+```
 
 ## Tech Stack
 
@@ -51,6 +79,10 @@
 - Express.js  
 - MongoDB (with Mongoose)  
 - JWT for authentication  
+
+**DevOps**  
+- Docker (Compose)  
+- Render (for live app hosting)  
 
 ---
 
