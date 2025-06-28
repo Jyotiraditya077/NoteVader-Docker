@@ -17,7 +17,7 @@
 
 - [Features](#features)
 - [Demo](#demo)
-- [Docker Setup](#-docker-setup)
+- [Docker Setup](#docker-setup)
 - [Tech Stack](#tech-stack)
 - [Contact](#contact)
 
